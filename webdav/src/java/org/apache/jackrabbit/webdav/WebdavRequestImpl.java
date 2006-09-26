@@ -169,6 +169,9 @@ public class WebdavRequestImpl implements WebdavRequest, DavConstants {
         if (destination != null) {
             try {
                 URI uri = new URI(destination);
+                if (uri.getAuthority() == null) {
+                    throw new URISyntaxException(destination, "URI is not absolute", 0);
+                }
                 if (uri.getAuthority().equals(httpRequest.getHeader("Host"))) {
                     destination = uri.getRawPath();
                 }
