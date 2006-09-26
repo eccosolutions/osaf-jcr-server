@@ -214,6 +214,16 @@ public class MultiStatusResponse implements XmlSerializable, DavConstants {
         return statusMap.containsKey(statusKey);
     }
 
+    /** */
+    public boolean hasNonOk() {
+        for (Iterator i=statusMap.keySet().iterator(); i.hasNext();) {
+            Integer s = (Integer) i.next();
+            if (s.intValue() != DavServletResponse.SC_OK)
+                return true;
+        }
+        return false;
+    }
+
     /**
      * @see org.apache.jackrabbit.webdav.xml.XmlSerializable#toXml(org.w3c.dom.Document)
      * @param document
