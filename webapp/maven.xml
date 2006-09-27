@@ -14,7 +14,7 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 -->
-<project default="war">
+<project default="jar">
     <!--
         the 'clean' goal is already redefined in the maven.xml
         of the parent project. we need to redefine it here
