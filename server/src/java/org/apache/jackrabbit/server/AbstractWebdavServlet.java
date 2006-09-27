@@ -398,13 +398,6 @@ abstract public class AbstractWebdavServlet extends HttpServlet implements DavCo
             return;
         }
 
-        if (resource.isCollection() &&
-            ! request.getRequestURI().endsWith("/")) {
-            // if path does not end in trailing "/", redirect to that
-            response.sendRedirect(request.getRequestURI() + "/");
-            return;
-        }
-
         long modSince = request.getDateHeader("If-Modified-Since");
         if (modSince > IOUtil.UNDEFINED_TIME) {
         long modTime = resource.getModificationTime();
