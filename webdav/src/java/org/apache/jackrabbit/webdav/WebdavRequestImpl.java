@@ -105,9 +105,16 @@ public class WebdavRequestImpl implements WebdavRequest, DavConstants {
         this.factory = factory;
         this.ifHeader = new IfHeader(httpRequest);
 
-        String host = getHeader("Host");
-        String scheme = getScheme();
-        hrefPrefix = scheme + "://" + host + getContextPath();
+        StringBuffer buf = new StringBuffer();
+        buf.append(getScheme()).
+            append("://").
+            append(getServerName());
+        if ((isSecure() && getServerPort() != 443) ||
+            (getServerPort() != 80))
+            buf.append(":").append(getServerPort());
+        if (getContextPath() != "/")
+            buf.append(getContextPath());
+        hrefPrefix = buf.toString();
     }
 
     /**
